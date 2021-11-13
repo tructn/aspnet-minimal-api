@@ -24,16 +24,9 @@ app.MapGet("/books/{id}", async (int id, BookStoreDB dbContext) => Results.Ok(aw
 
 app.MapPost("/books", async (BookStoreDB dbContext, Book model) =>
 {
-    try
-    {
-        dbContext.Books.Add(model);
-        await dbContext.SaveChangesAsync();
-        return Results.Ok();
-    }
-    catch (Exception ex)
-    {
-        return Results.BadRequest();
-    }
+    dbContext.Books.Add(model);
+    await dbContext.SaveChangesAsync();
+    return Results.Ok();
 });
 
 app.MapDelete("/books/{id}", async (int id, BookStoreDB dbContext) =>
